@@ -1,0 +1,3 @@
+# game-suit
+
+<p>Suit adalah permainan tradisional yang sangat populer di Indonesia, di mana dua atau lebih pemain saling memilih salah satu dari tiga gerakan tangan: gunting, batu, atau kertas. Setiap gerakan memiliki kekuatannya sendiri: batu menghancurkan gunting, gunting memotong kertas, dan kertas membungkus batu. Permainan ini sering digunakan untuk mengambil keputusan secara adil dengan cara sederhana dan cepat, serta dapat dimainkan oleh siapa saja, kapan saja, tanpa memerlukan alat bantu khusus. Dengan aturan yang mudah dipahami dan strategi yang sederhana, suit menjadi cara yang menyenangkan dan efektif untuk menentukan pemenang dalam situasi sehari-hari.</p>
