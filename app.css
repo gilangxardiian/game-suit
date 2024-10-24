@@ -1,0 +1,30 @@
+#container {
+  /* border: 1px solid red; */
+  display: flex;
+}
+
+#komputer,
+#player {
+  /* border: 1px solid black; */
+  margin-right: 15px;
+}
+
+#player button {
+  margin-right: 10px;
+}
+
+.hilang {
+  display: none;
+}
+
+h1.win {
+  color: rgb(59, 241, 59);
+}
+
+h1.lose {
+  color: red;
+}
+
+h1.draw {
+  color: #000;
+}
