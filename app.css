@@ -1,30 +1,296 @@
-#container {
-  /* border: 1px solid red; */
+@font-face {
+  font-family: "Barlow Regular";
+  src: url("assets/fonts/barlow-semi-condensed/BarlowSemiCondensed-Regular.woff2") format("woff2"), url("assets/fonts/barlow-semi-condensed/BarlowSemiCondensed-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Barlow Semi Bold";
+  src: url("assets/fonts/barlow-semi-condensed/BarlowSemiCondensed-SemiBold.woff2") format("woff2"), url("assets/fonts/barlow-semi-condensed/BarlowSemiCondensed-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Barlow Bold";
+  src: url("assets/fonts/barlow-semi-condensed/BarlowSemiCondensed-Bold.woff2") format("woff2"), url("assets/fonts/barlow-semi-condensed/BarlowSemiCondensed-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+body {
+  background: radial-gradient(circle, hsl(214, 47%, 23%), hsl(221, 59%, 15%));
+}
+
+.papan-skor {
+  border: 3px solid rgba(226, 226, 226, 0.3);
+  padding: 20px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 15px;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  -ms-border-radius: 15px;
+  -o-border-radius: 15px;
 }
 
-#komputer,
-#player {
-  /* border: 1px solid black; */
-  margin-right: 15px;
+.skor {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 45px;
+  padding-right: 45px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
 }
 
-#player button {
-  margin-right: 10px;
+.skor span {
+  text-align: center;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-family: "Barlow Bold", Arial, Helvetica, sans-serif;
+  color: hsl(229, 64%, 46%);
 }
 
+.skor .angka-skor {
+  font-size: 51px;
+  letter-spacing: 0px;
+  margin-top: -13px;
+  color: hsl(229, 25%, 31%);
+}
+
+.game-step-satu {
+  background-image: url("assets/img/bg-triangle.svg");
+  background-repeat: no-repeat;
+  background-size: 180px 120px;
+  background-position: center;
+  /* border: 2px solid red; */
+}
+
+.container-tombol-top,
+.container-tombol-bot {
+  /* border: 2px solid red; */
+  display: flex;
+  justify-content: center;
+  gap: 55px;
+}
+
+.container-tombol-bot {
+  gap: 0px;
+  margin-top: 18px;
+}
+
+.container-tombol-top .kotak,
+.container-tombol-bot .kotak,
+.pilihan-player .pilih-batu,
+.pilihan-komputer .pilih-batu,
+.pilihan-player .pilih-gunting,
+.pilihan-komputer .pilih-gunting,
+.pilihan-player .pilih-kertas,
+.pilihan-komputer .pilih-kertas {
+  display: block;
+  height: 120px;
+  width: 120px;
+  background-color: white;
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  -ms-border-radius: 100%;
+  -o-border-radius: 100%;
+  cursor: pointer;
+}
+
+.container-tombol-top .kertas,
+.pilihan-player .pilih-kertas,
+.pilihan-komputer .pilih-kertas {
+  background-image: url("assets/img/icon-paper.svg");
+  background-repeat: no-repeat;
+  background-size: 50px 50px;
+  background-position: center;
+  border: 15px solid #3c79f5;
+}
+
+.container-tombol-top .gunting,
+.pilihan-player .pilih-gunting,
+.pilihan-komputer .pilih-gunting {
+  background-image: url("assets/img/icon-scissors.svg");
+  background-repeat: no-repeat;
+  background-size: 50px 50px;
+  background-position: center;
+  border: 15px solid #ffa41b;
+}
+
+.container-tombol-bot .batu,
+.pilihan-player .pilih-batu,
+.pilihan-komputer .pilih-batu {
+  background-image: url("assets/img/icon-rock.svg");
+  background-repeat: no-repeat;
+  background-size: 50px 50px;
+  background-position: center;
+  border: 15px solid #eb455f;
+}
+
+.container-peraturan {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+
+.container-peraturan .tombol-peraturan {
+  border: 3px solid rgba(226, 226, 226, 0.3);
+  color: #eee;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-family: "Barlow Semi Bold", Arial, Helvetica, sans-serif;
+  letter-spacing: 1.5px;
+  margin-right: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+  cursor: pointer;
+}
+
+.container-peraturan .bayangan-peraturan {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+
+.bayangan-peraturan .peraturan {
+  opacity: 1;
+  background-color: white;
+  padding-top: 15px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  padding: 30px;
+}
+
+.peraturan .judul-tombol {
+  height: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.judul-tombol h4 {
+  font-family: "Barlow Bold", Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  color: hsl(229, 25%, 31%);
+}
+
+.judul-tombol button {
+  margin-bottom: 5px;
+}
+
+.game-step-dua {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.penanda {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  color: white;
+}
+
+.game-step-dua .penanda h4 {
+  color: #fff;
+  text-transform: uppercase;
+  font-family: "Barlow Bold", Arial, Helvetica, sans-serif;
+}
+
+.game-step-dua .penanda span {
+  display: block;
+  text-transform: uppercase;
+  padding-left: 26px;
+  padding-right: 26px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: #eb455f;
+  background-color: #fff;
+  font-family: "Barlow Semi Bold", Arial, Helvetica, sans-serif;
+  letter-spacing: 1.4px;
+  cursor: pointer;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.pilihan-player,
+.pilihan-komputer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 1px solid red; */
+  gap: 25px;
+}
+
+.pilihan-komputer h6,
+.pilihan-player h6 {
+  font-family: "Barlow Bold", Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 1.3px;
+}
+
+.pilihan-player .pilih-batu,
+.pilihan-komputer .pilih-batu {
+  cursor: default;
+  height: 160px;
+  width: 160px;
+  background-size: 60px 60px;
+  border: 18px solid #eb455f;
+}
+
+.pilihan-player .pilih-gunting,
+.pilihan-komputer .pilih-gunting {
+  cursor: default;
+  height: 160px;
+  width: 160px;
+  background-size: 60px 60px;
+  border: 15px solid #ffa41b;
+}
+
+.pilihan-player .pilih-kertas,
+.pilihan-komputer .pilih-kertas {
+  cursor: default;
+  height: 160px;
+  width: 160px;
+  background-size: 60px 60px;
+  border: 15px solid #3c79f5;
+}
+
+.pilihan-player .hilang,
 .hilang {
   display: none;
-}
-
-h1.win {
-  color: rgb(59, 241, 59);
-}
-
-h1.lose {
-  color: red;
-}
-
-h1.draw {
-  color: #000;
 }

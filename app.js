@@ -1,14 +1,28 @@
+const containerTombolTop = document.querySelector(".container-tombol-top");
+const containerTombolBot = document.querySelector(".container-tombol-bot");
+const pilPlayer = document.querySelector(".pilihan-player");
+
+// game suit batu, gunting, kertas
 function mainGame() {
   // Tangkap elemen tombol
-  const buttonBatu = document.querySelector("#btn-batu");
-  const buttonGunting = document.querySelector("#btn-gunting");
   const buttonKertas = document.querySelector("#btn-kertas");
-  const buttonLagi = document.querySelector(".btn-lagi");
+  const buttonGunting = document.querySelector("#btn-gunting");
+  const buttonBatu = document.querySelector("#btn-batu");
 
-  // Fungsi menangani logika permainan
+  // tankap container
+  const gameStepSatu = document.querySelector(".game-step-satu");
+  const gameStepDua = document.querySelector(".game-step-dua");
+  const penanda = document.querySelector(".penanda");
+  const pilKomputer = document.querySelector(".pilihan-komputer");
+  const pilPlayer = document.querySelector(".pilihan-player");
+
+  // pilihan komputer
+  let komp;
+
   function games(player) {
     // Pilihan komputer
-    const computer = pilihanKomputer();
+    const komputer = pilihanKomputer();
+    komp = komputer;
 
     // Fungsi untuk menentukan pilihan komputer
     function pilihanKomputer() {
@@ -22,159 +36,173 @@ function mainGame() {
       }
     }
 
-    // Buat elemen baru untuk menunjukkan pilihan komputer
+    // span untuk di dalam kontainer pilihan komputer
     function buatElementBaru() {
-      const komputer = document.querySelector("#komputer");
-
-      // Hapus elemen lama jika ada
-      komputer.innerHTML = "";
-
-      let headingKomputer = document.createElement("h1");
-      headingKomputer.textContent = "Pilihan Komputer";
-
-      let buttonKomputer = document.createElement("button");
-      buttonKomputer.textContent = `${computer}`;
-
-      komputer.appendChild(headingKomputer);
-      komputer.appendChild(buttonKomputer);
+      const spanBaru = document.createElement("span");
+      spanBaru.classList.add(`pilih-${komputer}`);
+      pilKomputer.appendChild(spanBaru);
     }
 
-    // Tanda hasil pertandingan
-    const menang = document.querySelector(".win");
-    const kalah = document.querySelector(".lose");
-    const seri = document.querySelector(".draw");
+    // penanda menang, seri, kalah
+    function tanda(status) {
+      if (status === "seri") {
+        setTimeout(() => {
+          penanda.querySelector("h4").textContent = `${status}`;
+          penanda.style.visibility = "visible";
+        }, 1000);
+      } else if (status === "menang") {
+        setTimeout(() => {
+          penanda.querySelector("h4").textContent = `kamu ${status}`;
+          penanda.style.visibility = "visible";
+        }, 1000);
+      } else if (status === "kalah") {
+        setTimeout(() => {
+          penanda.querySelector("h4").textContent = `kamu ${status}`;
+          penanda.style.visibility = "visible";
+        }, 1000);
+      } else {
+        console.log("status tidak diketahui");
+      }
+    }
 
-    // skor hasil pertandingan
-    let skorSpan = document.querySelector("#skor");
+    // pengaturan skor
+    let skorSpan = document.querySelector(".angka-skor");
     let skor = parseInt(skorSpan.textContent);
 
-    // Rules permainan
-    let hasil = "";
-    buatElementBaru(); // Menampilkan pilihan komputer
+    // membuat elemen baru
+    buatElementBaru();
 
-    if (player === computer) {
-      seri.classList.remove("hilang");
-      hasil = `player: ${player}, komputer: ${computer}, hasil: DRAW!`;
+    // aturan main
+    if (player === komputer) {
+      tanda("seri");
     } else if (player === "batu") {
-      if (computer === "gunting") {
-        menang.classList.remove("hilang");
-        skorSpan.textContent = skor + 1;
-        hasil = `player: ${player}, komputer: ${computer}, hasil: WIN!`;
+      if (komputer === "gunting") {
+        tanda("menang");
+        setTimeout(() => {
+          skorSpan.textContent = skor + 1;
+        }, 1500);
       } else {
-        kalah.classList.remove("hilang");
-        if (skor === 0) {
-          hasil = `player: ${player}, komputer: ${computer}, hasil: LOSE!`;
-        } else {
-          skorSpan.textContent = skor - 1;
+        tanda("kalah");
+        if (skor !== 0) {
+          setTimeout(() => {
+            skorSpan.textContent = skor - 1;
+          }, 1500);
         }
       }
     } else if (player === "gunting") {
-      if (computer === "batu") {
-        kalah.classList.remove("hilang");
-        if (skor === 0) {
-          hasil = `player: ${player}, komputer: ${computer}, hasil: LOSE!`;
-        } else {
-          skorSpan.textContent = skor - 1;
+      if (komputer === "batu") {
+        tanda("kalah");
+        if (skor !== 0) {
+          setTimeout(() => {
+            skorSpan.textContent = skor - 1;
+          }, 1500);
         }
       } else {
-        menang.classList.remove("hilang");
-        skorSpan.textContent = skor + 1;
-        hasil = `player: ${player}, komputer: ${computer}, hasil: WIN!`;
+        tanda("menang");
+        setTimeout(() => {
+          skorSpan.textContent = skor + 1;
+        }, 1500);
       }
     } else if (player === "kertas") {
-      if (computer === "gunting") {
-        kalah.classList.remove("hilang");
-        if (skor === 0) {
-          hasil = `player: ${player}, komputer: ${computer}, hasil: LOSE!`;
-        } else {
-          skorSpan.textContent = skor - 1;
+      if (komputer === "gunting") {
+        tanda("kalah");
+        if (skor !== 0) {
+          setTimeout(() => {
+            skorSpan.textContent = skor - 1;
+          }, 1500);
         }
       } else {
-        menang.classList.remove("hilang");
-        skorSpan.textContent = skor + 1;
-        hasil = `player: ${player}, komputer: ${computer}, hasil: WIN!`;
+        tanda("menang");
+        setTimeout(() => {
+          skorSpan.textContent = skor + 1;
+        }, 1500);
       }
     } else {
-      hasil = `Memasukkan pilihan yang salah`;
+      console.log("hasil tidak diketahui");
     }
-
-    console.log(hasil);
-    buttonLagi.classList.remove("hilang");
   }
 
-  // Menambahkan event listener hanya jika belum ada (mencegah duplikasi listener)
-  if (!buttonBatu.disabled) {
-    // Event listener untuk tombol batu
-    buttonBatu.addEventListener("click", function () {
-      games(this.textContent);
-      buttonGunting.classList.add("hilang");
-      buttonKertas.classList.add("hilang");
-      this.disabled = true;
-    });
+  // Fungsi ini dijalankan ketika player memilih
+  function klikTombol(tombol) {
+    games(tombol);
+    gameStepSatu.classList.add("hilang");
+    gameStepDua.classList.remove("hilang");
+    penanda.style.visibility = "hidden";
+
+    let spanKomp = pilKomputer.querySelector(`.pilih-${komp}`);
+    spanKomp.style.visibility = "hidden";
+    setTimeout(() => {
+      spanKomp.style.visibility = "visible";
+    }, 500);
   }
 
-  if (!buttonGunting.disabled) {
-    // Event listener untuk tombol gunting
-    buttonGunting.addEventListener("click", function () {
-      games(this.textContent);
-      buttonBatu.classList.add("hilang");
-      buttonKertas.classList.add("hilang");
-      this.disabled = true;
-    });
-  }
+  // Event listener untuk tombol batu
+  buttonBatu.addEventListener("click", function () {
+    klikTombol(this.getAttribute("aria-label"));
+    pilPlayer.querySelector(".pilih-batu").classList.remove("hilang");
+  });
 
-  if (!buttonKertas.disabled) {
-    // Event listener untuk tombol kertas
-    buttonKertas.addEventListener("click", function () {
-      games(this.textContent);
-      buttonBatu.classList.add("hilang");
-      buttonGunting.classList.add("hilang");
-      this.disabled = true;
-    });
-  }
+  // Event listener untuk tombol gunting
+  buttonGunting.addEventListener("click", function () {
+    klikTombol(this.getAttribute("aria-label"));
+    pilPlayer.querySelector(".pilih-gunting").classList.remove("hilang");
+  });
+
+  // Event listener untuk tombol kertas
+  buttonKertas.addEventListener("click", function () {
+    klikTombol(this.getAttribute("aria-label"));
+    pilPlayer.querySelector(".pilih-kertas").classList.remove("hilang");
+  });
 }
 
-// menjalankan game ketika pertamakali halaman dikunjungi
+// menjalankan game pertama kali
 mainGame();
 
-// menjalankan game setelah user mengklik tombol lagi
-document.querySelector(".btn-lagi").addEventListener("click", function () {
-  console.log("Tombol 'lagi' diklik!");
+// fungsi menghilangkan kontainer
+function removeContainer() {
+  document.querySelector(".game-step-dua").classList.add("hilang");
+  document.querySelector(".game-step-satu").classList.remove("hilang");
+  document.querySelector(".container-tombol-top").innerHTML = "";
+  document.querySelector(".container-tombol-bot").innerHTML = "";
+  document.querySelector(".pilihan-komputer").innerHTML = "<h6>pilihan kamu</h6>";
+}
 
-  // membuat button baru
-  document.querySelector("#komputer").innerHTML = "";
-
-  const player = document.querySelector("#player");
-  player.innerHTML = "<h1>pilihan kamu</h1>";
-
-  const btnBatuBaru = document.createElement("button");
-  btnBatuBaru.textContent = "batu";
-  btnBatuBaru.setAttribute("type", "button");
-  btnBatuBaru.setAttribute("id", "btn-batu");
-  player.appendChild(btnBatuBaru);
-
-  const btnGuntingBaru = document.createElement("button");
-  btnGuntingBaru.textContent = "gunting";
-  btnGuntingBaru.setAttribute("type", "button");
-  btnGuntingBaru.setAttribute("id", "btn-gunting");
-  player.appendChild(btnGuntingBaru);
-
-  const btnKertasBaru = document.createElement("button");
-  btnKertasBaru.textContent = "kertas";
-  btnKertasBaru.setAttribute("type", "button");
+// elemen baru untuk rounde berikutnya
+function kertasBaru() {
+  const btnKertasBaru = document.createElement("span");
+  btnKertasBaru.setAttribute("aria-label", "kertas");
   btnKertasBaru.setAttribute("id", "btn-kertas");
-  player.appendChild(btnKertasBaru);
+  btnKertasBaru.classList.add("kotak", "kertas");
+  containerTombolTop.appendChild(btnKertasBaru);
 
-  // menghapus penanda
-  const penanda = document.querySelector("#penanda");
-  const tanda = penanda.querySelectorAll("h1");
+  pilPlayer.querySelector(".pilih-kertas").classList.add("hilang");
+}
 
-  for (let tnd of tanda) {
-    tnd.classList.add("hilang");
-  }
+function guntingBaru() {
+  const btnGuntingBaru = document.createElement("span");
+  btnGuntingBaru.setAttribute("aria-label", "gunting");
+  btnGuntingBaru.setAttribute("id", "btn-gunting");
+  btnGuntingBaru.classList.add("kotak", "gunting");
+  containerTombolTop.appendChild(btnGuntingBaru);
 
-  // menghapus tombol lagi
-  this.classList.add("hilang");
+  pilPlayer.querySelector(".pilih-gunting").classList.add("hilang");
+}
+
+function batuBaru() {
+  const btnBatuBaru = document.createElement("span");
+  btnBatuBaru.setAttribute("aria-label", "batu");
+  btnBatuBaru.setAttribute("id", "btn-batu");
+  btnBatuBaru.classList.add("kotak", "batu");
+  containerTombolBot.appendChild(btnBatuBaru);
+
+  pilPlayer.querySelector(".pilih-batu").classList.add("hilang");
+}
+
+document.querySelector(".main-lagi").addEventListener("click", function () {
+  removeContainer();
+  kertasBaru();
+  guntingBaru();
+  batuBaru();
 
   // menjalankan lagi
   mainGame();

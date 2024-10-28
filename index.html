@@ -5,27 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Game Suit</title>
     <link rel="stylesheet" href="app.css" />
+    <link rel="stylesheet" href="assets/vendor/bootstrap-5.3.3-dist/css/bootstrap.min.css" />
   </head>
   <body>
-    <section id="container">
-      <div id="player">
-        <h1>pilihan kamu</h1>
-        <button type="button" id="btn-batu">batu</button>
-        <button type="button" id="btn-gunting">gunting</button>
-        <button type="button" id="btn-kertas">kertas</button>
+    <section class="container-fluid">
+      <div class="row justify-content-center pt-5">
+        <div class="col-6 papan-skor">
+          <div class="nama-game">
+            <img src="assets/img/logo.svg" alt="Nama Game" />
+          </div>
+          <div class="skor">
+            <span>skor</span>
+            <span class="angka-skor">0</span>
+          </div>
+        </div>
       </div>
-      <div id="komputer"></div>
+      <div class="row justify-content-center">
+        <div class="col-6 game-step-satu" style="margin-top: 45px">
+          <div class="container-tombol-top">
+            <span id="btn-kertas" class="kotak kertas" aria-label="kertas"></span>
+            <span id="btn-gunting" class="kotak gunting" aria-label="gunting"></span>
+          </div>
+          <div class="container-tombol-bot">
+            <span id="btn-batu" class="kotak batu" aria-label="batu"></span>
+          </div>
+        </div>
+        <div class="col-8 game-step-dua hilang" style="margin-top: 45px; margin-bottom: 45px">
+          <div class="pilihan-player">
+            <h6>pilihan kamu</h6>
+            <span class="pilih-batu hilang"></span>
+            <span class="pilih-kertas hilang"></span>
+            <span class="pilih-gunting hilang"></span>
+          </div>
+          <div class="penanda">
+            <h4>kamu kalah</h4>
+            <span class="main-lagi">main lagi</span>
+          </div>
+          <div class="pilihan-komputer">
+            <h6>pilihan komputer</h6>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 15px">
+        <div class="col-12 container-peraturan">
+          <span class="tombol-peraturan">peraturan</span>
+          <div class="bayangan-peraturan">
+            <div class="peraturan">
+              <div class="judul-tombol">
+                <h4>peraturan</h4>
+                <button type="button" class="btn-close" aria-label="Close"></button>
+              </div>
+              <img src="assets/img/image-rules.svg" width="250" alt="Peraturan" />
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-    <section id="penanda">
-      <h1 class="win hilang">Kamu menang!</h1>
-      <h1 class="lose hilang">Kamu kalah!</h1>
-      <h1 class="draw hilang">Seri!</h1>
-    </section>
-    <section id="papanSkor">
-      <h1>Skor kamu <span id="skor">0</span></h1>
-    </section>
-    <button type="button" class="btn-lagi hilang">lagi</button>
-
+    <script src="assets/vendor/bootstrap-5.3.3-dist/js/bootstrap.min.js"></script>
     <script src="app.js"></script>
   </body>
 </html>
